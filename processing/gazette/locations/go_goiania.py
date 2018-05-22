@@ -1,10 +1,12 @@
+import re
+
 from .base_parser import BaseParser
 
 
 class GoGoiania(BaseParser):
 
     def pages(self):
-        return self.text.split('DOM Eletrônico')[1:]
+        return re.split(r'Página \d+ de \d+', self.text)[1:]
 
     def bidding_exemption_sections(self):
         for section in self.pages():
